@@ -72,6 +72,65 @@ app.get('/api/dinner', async (req,res,next)=> {
     }
 })
 
+
+//to add your own brakfast items using input
+app.post('/api/breakfast', async (req, res, next) => {
+    try {
+        const item = await Menu.create(req.params);
+        res.status(201).send(item);
+    } catch (error) {
+        next(error)
+    }
+})
+
+//to add your own lunch items using input
+app.post('/api/lunch', async (req, res, next) => {
+    try {
+        const item = await Menu.create(req.params);
+        res.status(201).send(item);
+    } catch (error) {
+        next(error)
+    }
+})
+
+//to add your own dinner items using input
+app.post('/api/dinner', async (req, res, next) => {
+    try {
+        const item = await Menu.create(req.params);
+        res.status(201).send(item);
+    } catch (error) {
+        next(error)
+    }
+})
+
+app.delete('/api/breakfast/:id', async(req, res, next) => {
+    try {
+        const item = await Movie.findByPk(req.params.id);
+        await item.destroy();
+        res.sendStatus(204);
+    } catch (error) {
+        next(error)
+    }
+})
+app.delete('/api/lunch/:id', async(req, res, next) => {
+    try {
+        const item = await Movie.findByPk(req.params.id);
+        await item.destroy();
+        res.sendStatus(204);
+    } catch (error) {
+        next(error)
+    }
+})
+app.delete('/api/dinner/:id', async(req, res, next) => {
+    try {
+        const item = await Movie.findByPk(req.params.id);
+        await item.destroy();
+        res.sendStatus(204);
+    } catch (error) {
+        next(error)
+    }
+})
+
 app.get('/', (req,res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 //connect to dist folder
