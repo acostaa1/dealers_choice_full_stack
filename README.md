@@ -14,7 +14,7 @@ use this file structure to start out:
 
 <!-- 
 x build a simple Sequelize model and seed some data when the express application starts
-build an express api GET route which can be used by the client to return data from your model
+x build an express api GET route which can be used by the client to return data from your model
 build out your front end slowly using redux, react-redux, redux-thunk. You can keep things in one file and separate things out as you get things working.
 when you are able to show the back end data on the front end, then you should move on
 using react-router-dom add a client side route which shows a single item.

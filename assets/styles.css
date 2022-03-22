@@ -1,0 +1,36 @@
+body {
+    padding: 1rem;
+    
+
+}
+
+.menus {
+    display: flex;
+    background-color: turquoise;
+    align-content: center;
+    
+
+}
+
+.menus > div {
+    background-color: cornsilk;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+li {
+    text-align: left;
+}
+
+form > input, button {
+    
+   align-content: center;
+   align-items: center;
+}
+
+
+
+
+
