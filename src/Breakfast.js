@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { removeBreakfast } from "./store";
 import AddBreakfast from "./AddBreakfast";
+import {Link} from 'react-router-dom'
 
 
 const Breakfast = ({ breakfastItems, addBreakfast, removeBreakfast }) => {
@@ -12,7 +13,7 @@ const Breakfast = ({ breakfastItems, addBreakfast, removeBreakfast }) => {
       <ul>
         {breakfastItems.map((item) => (
           <li key={item.id}>
-            {item.name} ...... ${item.price} <button onClick= {() => removeBreakfast(item)}>X</button>
+            <Link to= {`/breakfast/${item.id}`} >{item.name}</Link> ...... ${item.price} <button onClick= {() => removeBreakfast(item)}>X</button>
           </li>
         ))}
       </ul>

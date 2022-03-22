@@ -4,6 +4,13 @@ import ReactDOM from "react-dom";
 import Breakfast from "./Breakfast";
 import store from "./store";
 import { connect, Provider } from "react-redux";
+import { HashRouter, Route, Link } from "react-router-dom";
+
+const Info = connect((state) => state)((props) => {
+    const item = props.breakfastItems.find(item => item.id === props.match.params.id*1);
+    return (`Calorie Count: ${[item.calories]}`)
+  
+});
 
 class _App extends Component {
   constructor() {
@@ -23,6 +30,10 @@ class _App extends Component {
     }
     return (
       <div className="menus">
+        <h2>
+          <Link to="/">Menus</Link>
+        </h2>
+        <Route path="/breakfast/:id" component={Info} />
         <Breakfast />
       </div>
     );
@@ -47,4 +58,11 @@ const mapDispatchToProps = (dispatch) => {
 
 const App = connect(mapStateToProps, mapDispatchToProps)(_App);
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.querySelector("#root"));
+ReactDOM.render(
+  <HashRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </HashRouter>,
+  document.querySelector("#root")
+);
