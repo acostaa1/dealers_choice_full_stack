@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { removeBreakfast } from "./store";
+import AddBreakfast from "./AddBreakfast";
 
 
 const Breakfast = ({ breakfastItems, addBreakfast, removeBreakfast }) => {
@@ -15,12 +16,7 @@ const Breakfast = ({ breakfastItems, addBreakfast, removeBreakfast }) => {
           </li>
         ))}
       </ul>
-      <form>
-        <input placeholder="item name"></input>
-        <input placeholder="item price"></input>
-        <input placeholder="item calories"></input>
-        <button onClick={() => addBreakfast()}>Add To Menu</button>
-      </form>
+      <AddBreakfast />
     </div>
   );
 };
@@ -31,13 +27,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addBreakfast: async () => {
-      const bfast = (await axios.post("/api/breakfast")).data;
-      dispatch({
-        type: "ADD_BREAKFAST",
-        item,
-      });
-    },
+    
     removeBreakfast: (item) => {
         dispatch(removeBreakfast(item))
     }

@@ -83,9 +83,9 @@ app.get('/api/breakfast/:id', async (req, res, next)=> {
 
 
 //to add your own breakfast items using input
-app.post('/api/breakfast', async (req, res, next) => {
+app.post('/api/breakfast/:name/:price/:calories', async (req, res, next) => {
     try {
-        const item = await Menu.create(req.params);
+        const item = await Item.create(req.params);
         res.status(201).send(item);
     } catch (error) {
         next(error)
