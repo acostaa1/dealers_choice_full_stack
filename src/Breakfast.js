@@ -1,16 +1,17 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { removeBreakfast } from "./store";
 
 
-const Breakfast = ({ breakfastItems, addBreakfast }) => {
+const Breakfast = ({ breakfastItems, addBreakfast, removeBreakfast }) => {
   return (
     <div id="breakfast">
       <h3>Breakfast ({breakfastItems.length})</h3>
       <ul>
         {breakfastItems.map((item) => (
           <li key={item.id}>
-            {item.name} ...... ${item.price} <button>X</button>
+            {item.name} ...... ${item.price} <button onClick= {() => removeBreakfast(item)}>X</button>
           </li>
         ))}
       </ul>
@@ -31,11 +32,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addBreakfast: async () => {
-      const item = (await axios.post("/api/breakfast")).data;
+      const bfast = (await axios.post("/api/breakfast")).data;
       dispatch({
         type: "ADD_BREAKFAST",
         item,
       });
+    },
+    removeBreakfast: (item) => {
+        dispatch(removeBreakfast(item))
     }
   };
 };

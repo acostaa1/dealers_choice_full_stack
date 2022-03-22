@@ -42,38 +42,47 @@ app.get('/api/breakfast', async (req,res,next)=> {
        next(error) 
     }
 })
-app.get('/api/lunch', async (req,res,next)=> {
+
+app.get('/api/breakfast/:id', async (req, res, next)=> {
     try {
-        
-        const dishes = await Item.findAll({
-            include: [Menu],
-            where: {
-              menuId: 2
-            }
-        });
-        res.send(dishes)
+        const item = await Item.findByPk(req.params.id, {include: [Menu]});
+        res.send(item);
     } catch (error) {
-       next(error) 
+        next (error)
     }
 })
-
-app.get('/api/dinner', async (req,res,next)=> {
-    try {
+// app.get('/api/lunch', async (req,res,next)=> {
+//     try {
         
-        const dishes = await Item.findAll({
-            include: [Menu],
-            where: {
-              menuId: 3
-            }
-        });
-        res.send(dishes)
-    } catch (error) {
-       next(error) 
-    }
-})
+//         const dishes = await Item.findAll({
+//             include: [Menu],
+//             where: {
+//               menuId: 2
+//             }
+//         });
+//         res.send(dishes)
+//     } catch (error) {
+//        next(error) 
+//     }
+// })
+
+// app.get('/api/dinner', async (req,res,next)=> {
+//     try {
+        
+//         const dishes = await Item.findAll({
+//             include: [Menu],
+//             where: {
+//               menuId: 3
+//             }
+//         });
+//         res.send(dishes)
+//     } catch (error) {
+//        next(error) 
+//     }
+// })
 
 
-//to add your own brakfast items using input
+//to add your own breakfast items using input
 app.post('/api/breakfast', async (req, res, next) => {
     try {
         const item = await Menu.create(req.params);
@@ -83,53 +92,53 @@ app.post('/api/breakfast', async (req, res, next) => {
     }
 })
 
-//to add your own lunch items using input
-app.post('/api/lunch', async (req, res, next) => {
-    try {
-        const item = await Menu.create(req.params);
-        res.status(201).send(item);
-    } catch (error) {
-        next(error)
-    }
-})
+// //to add your own lunch items using input
+// app.post('/api/lunch', async (req, res, next) => {
+//     try {
+//         const item = await Menu.create(req.params);
+//         res.status(201).send(item);
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
-//to add your own dinner items using input
-app.post('/api/dinner', async (req, res, next) => {
-    try {
-        const item = await Menu.create(req.params);
-        res.status(201).send(item);
-    } catch (error) {
-        next(error)
-    }
-})
+// //to add your own dinner items using input
+// app.post('/api/dinner', async (req, res, next) => {
+//     try {
+//         const item = await Menu.create(req.params);
+//         res.status(201).send(item);
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 app.delete('/api/breakfast/:id', async(req, res, next) => {
     try {
-        const item = await Movie.findByPk(req.params.id);
+        const item = await Item.findByPk(req.params.id);
         await item.destroy();
         res.sendStatus(204);
     } catch (error) {
         next(error)
     }
 })
-app.delete('/api/lunch/:id', async(req, res, next) => {
-    try {
-        const item = await Movie.findByPk(req.params.id);
-        await item.destroy();
-        res.sendStatus(204);
-    } catch (error) {
-        next(error)
-    }
-})
-app.delete('/api/dinner/:id', async(req, res, next) => {
-    try {
-        const item = await Movie.findByPk(req.params.id);
-        await item.destroy();
-        res.sendStatus(204);
-    } catch (error) {
-        next(error)
-    }
-})
+// app.delete('/api/lunch/:id', async(req, res, next) => {
+//     try {
+//         const item = await Menu.findByPk(req.params.id);
+//         await item.destroy();
+//         res.sendStatus(204);
+//     } catch (error) {
+//         next(error)
+//     }
+// })
+// app.delete('/api/dinner/:id', async(req, res, next) => {
+//     try {
+//         const item = await Menu.findByPk(req.params.id);
+//         await item.destroy();
+//         res.sendStatus(204);
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 app.get('/', (req,res) => res.sendFile(path.join(__dirname, 'index.html')));
 
